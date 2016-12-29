@@ -1,3 +1,6 @@
+- [X] Feature already available in [`typescript@next`](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Nightly%20Builds.md)
+
+
 # Future
 
 * Support [type-checking of computed properties for constants and Symbols](https://github.com/Microsoft/TypeScript/issues/5579)
@@ -8,22 +11,44 @@
 * Implement new ES Decorator proposal
 * Investigate [Ambient](https://github.com/Microsoft/TypeScript/issues/2900), [Deprecated](https://github.com/Microsoft/TypeScript/issues/390), and [Conditional](https://github.com/Microsoft/TypeScript/issues/3538) decorators
 * Decorators for function expressions/arrow functions
+* Refactoring support in Language Service API
+* Investigate [Language Service extensibility](https://github.com/Microsoft/TypeScript/issues/6508)
 
-# 2.1 (November 2016)
+# 2.2 (February 2017)
+
+* [ ] [Support for `new.target`](https://github.com/Microsoft/TypeScript/issues/2551)
+* [ ] [Generator support for ES3/ES5](https://github.com/Microsoft/TypeScript/issues/1564)
+* [ ] [Asynchronous iterators](https://github.com/Microsoft/TypeScript/issues/11326)
+* [X] [Support for JSX spread children](https://github.com/Microsoft/TypeScript/issues/9495)
+* [ ] [Better error reporting for errors in `tsconfig.json`](https://github.com/Microsoft/TypeScript/pull/12336)
+* [ ] [Generic defaults](https://github.com/Microsoft/TypeScript/issues/2175)
+* [ ] [JSX stateless components overload resolution](https://github.com/Microsoft/TypeScript/issues/9703)
+* [ ] [Better support for literal types in JSX attributes](https://github.com/Microsoft/TypeScript/issues/10393)
+* [X] More Quick fixes: [Add missing imports](https://github.com/Microsoft/TypeScript/pull/11768), [Implement interface](https://github.com/Microsoft/TypeScript/pull/11547), and [Remove unused declarations](https://github.com/Microsoft/TypeScript/pull/11546)
+
+# 2.1 (December 2016)
 
 * [X] Switch to a [transformation-based emitter](https://github.com/Microsoft/TypeScript/issues/5595)
 * [X] [`async`/`await` support for ES5/ES3](https://github.com/Microsoft/TypeScript/pull/9175)
 * [X] Support for [external helpers library](https://github.com/Microsoft/TypeScript/issues/3364)
+* [X] [Static types for dynamically named properties (`keyof T` and `T[K]`)](https://github.com/Microsoft/TypeScript/pull/11929)
+* [X] [Mapped types (e.g. `{ [P in K]: T[P] }`)](https://github.com/Microsoft/TypeScript/pull/12114)
+* [X] Support [ESNext object property spread and rest](https://github.com/Microsoft/TypeScript/issues/2103)
 * [X] [Better inference for literal types](https://github.com/Microsoft/TypeScript/pull/10676)
 * [X] [Use returned values from super calls as 'this'](https://github.com/Microsoft/TypeScript/pull/10762)
-* [ ] [Control flow analysis for implicit any variables](https://github.com/Microsoft/TypeScript/pull/11263)
+* [X] [Control flow analysis for implicit any variables](https://github.com/Microsoft/TypeScript/pull/11263)
+* [X] [Control flow analysis for array construction](https://github.com/Microsoft/TypeScript/pull/11432)
+* [X] [Narrow string and number types in literal equality checks](https://github.com/Microsoft/TypeScript/pull/11587)
+* [X] [Contextual typing of partially annotated signatures](https://github.com/Microsoft/TypeScript/pull/11673)
+* [X] [Normalize union/intersection type combinations](https://github.com/Microsoft/TypeScript/pull/11717)
+* [X] New [`--jsxFactory`](https://github.com/Microsoft/TypeScript/pull/12135)
+* [X] New [`--alwaysStrict`](https://github.com/Microsoft/TypeScript/issues/10758)
+* [X] Support for [`--target ES2016`, `--target ES2017`](https://github.com/Microsoft/TypeScript/pull/11407) and `--target ESNext`
 * [X] [Configuration inheritance](https://github.com/Microsoft/TypeScript/issues/9876)
 * [X] [Go to implementation support](https://github.com/Microsoft/TypeScript/pull/10482)
 * [X] [Completions in imports and triple-slash reference paths](https://github.com/Microsoft/TypeScript/issues/188)
-* [ ] Support [ES8 object property spread and rest](https://github.com/Microsoft/TypeScript/issues/2103)
-* [ ] [Quick fixes support](https://github.com/Microsoft/TypeScript/issues/6943) in language service API
-* [ ] Refactoring support in Language Service API
-* [ ] Investigate [Language Service extensibility](https://github.com/Microsoft/TypeScript/issues/6508)
+* [X] [Quick fixes support](https://github.com/Microsoft/TypeScript/issues/6943) in language service API
+* [X] [Untyped](https://github.com/Microsoft/TypeScript/pull/11889) (implicit-any) imports
 
 # 2.0
 
@@ -150,11 +175,3 @@
 * [X] Language service re-write to target new compiler
 * [X] Support for [protected members](https://github.com/Microsoft/TypeScript/pull/688) in classes
 * [X] Support for [Tuple Types](https://github.com/Microsoft/TypeScript/pull/428)
-
-
-
-<br/>
-<br/>
-<br/>
-***
-- [X] Feature already available in [`typescript@next`](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Nightly%20Builds.md)

@@ -30,7 +30,7 @@
     - [Why does `this` get orphaned in my instance methods?](#why-does-this-get-orphaned-in-my-instance-methods)
     - [What's the difference between `Bar` and `typeof Bar` when `Bar` is a `class` ?](#whats-the-difference-between-bar-and-typeof-bar-when-bar-is-a-class-)
     - [Why do my derived class property initializers overwrite values set in the base class constructor?](#why-do-my-derived-class-property-initializers-overwrite-values-set-in-the-base-class-constructor)
-    - [What's the difference between `declare class` and `inteface`?](#whats-the-difference-between-declare-class-and-inteface)
+    - [What's the difference between `declare class` and `interface`?](#whats-the-difference-between-declare-class-and-interface)
     - [What does it mean for an interface to extend a class?](#what-does-it-mean-for-an-interface-to-extend-a-class)
     - [Why am I getting "TypeError: [base class name] is not defined in `__extends` ?](#why-am-i-getting-typeerror-base-class-name-is-not-defined-in-__extends-)
     - [Why am I getting "TypeError: Cannot read property 'prototype' of undefined" in `__extends` ?](#why-am-i-getting-typeerror-cannot-read-property-prototype-of-undefined-in-__extends-)
@@ -66,10 +66,11 @@
   - [`tsconfig.json` Behavior](#tsconfigjson-behavior)
     - [Why is a file in the `exclude` list still picked up by the compiler?](#why-is-a-file-in-the-exclude-list-still-picked-up-by-the-compiler)
     - [How can I specify an `include`?](#how-can-i-specify-an-include)
-  - [Glossary and Terms in this FAQ](#glossary-and-terms-in-this-faq)
+    - [Why am I getting the `error TS5055: Cannot write file 'xxx.js' because it would overwrite input file.` when using JavaScript files?](#why-am-i-getting-the-error-ts5055-cannot-write-file-xxxjs-because-it-would-overwrite-input-file-when-using-javascript-files)
+- [Glossary and Terms in this FAQ](#glossary-and-terms-in-this-faq)
     - [Dogs, Cats, and Animals, Oh My](#dogs-cats-and-animals-oh-my)
     - ["Substitutability"](#substitutability)
-  - [GitHub Process Questions](#github-process-questions)
+- [GitHub Process Questions](#github-process-questions)
     - [What do the labels on these issues mean?](#what-do-the-labels-on-these-issues-mean)
     - [I disagree with the outcome of this suggestion](#i-disagree-with-the-outcome-of-this-suggestion)
 
@@ -187,7 +188,7 @@ There's not a good reason to reject this program on the basis that `Dog[]` can't
 Back to the first question.
 When the type system decides whether or not `Dog[]` is a subtype of `Animal[]`, it does the following computation (written here as if the compiler took no optimizations), among many others:
 
- * Is `Dog[]` assignable to Animal[]` ?
+ * Is `Dog[]` assignable to `Animal[]` ?
   * Is each member of `Dog[]` assignable to `Animal[]` ?
     * Is `Dog[].push` assignable to `Animal[].push`?
       * Is the type `(x: Dog) => number` assignable to `(x: Animal) => number` ?
@@ -656,7 +657,7 @@ Thus, `typeof MyClass` refers to the type of the expression `MyClass` - the *con
 See [#1617](https://github.com/Microsoft/TypeScript/issues/1617) for this and other initialization order questions
 
 
-### What's the difference between `declare class` and `inteface`?
+### What's the difference between `declare class` and `interface`?
 
 TODO: Write up common symptoms of `declare class` / `interface` confusion.
 
@@ -770,7 +771,7 @@ The type will have unexpected compatibility (as shown here) and will also fail t
 > var y = findByName(x); // expected y: string, got y: {}
 > ```
 
-TypeScript uses a structrual type system.
+TypeScript uses a structural type system.
 This structuralness also applies during generic type inference.
 When inferring the type of `T` in the function call, we try to find *members* of type `T` on the `x` argument to figure out what `T` should be.
 Because there are no members which use `T`, there is nothing to infer from, so we return `{}`.
@@ -1175,6 +1176,17 @@ So to exclude a file from the compilation, you need to exclude and all **all** f
 ### How can I specify an `include`?
 
 There is no way now to indicate an `“include”` to a file outside the current folder in the `tsconfig.json` (tracked by [#1927](https://github.com/Microsoft/TypeScript/issues/1927)). You can achieve the same result by either: 1. Using a `“files”` list, or 2. Adding a `/// <reference path="..." />` directive in one of the files in your directory.
+
+### Why am I getting the `error TS5055: Cannot write file 'xxx.js' because it would overwrite input file.` when using JavaScript files?
+
+For a TypeScript file, the TypeScript compiler by default emits the generated JavaScript files in the same directory with the same base file name.
+Because the TypeScript files and emitted JavaScript files always have different file extensions, it is safe to do so.
+However, if you have set the `allowJs` compiler option to `true` and didn't set any emit output options (`outFile` and `outDir`), the compiler will try to emit JavaScript source files by the same rule, which will result in the emitted JavaScript file having the same file name with the source file. To avoid accidently overwriting your source file, the  compiler will issue this warning and skip writing the output files.
+
+There are multiple ways to solve this issue, though all of them involve configuring compiler options, therefore it is recommended that you have a `tsconfig.json` file in the project root to enable this. 
+If you don't want JavaScript files included in your project at all, simply set the `allowJs` option to `false`;
+If you do want to include and compile these JavaScript files, set the `outDir` option or `outFile` option to direct the emitted files elsewhere, so they won't conflict with your source files;
+If you just want to include the JavaScript files for editing and don't need to compile, set the `noEmit` compiler option to `true` to skip the emitting check.
 
 -------------------------------------------------------------------------------------
 
